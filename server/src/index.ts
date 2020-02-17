@@ -43,6 +43,10 @@ import { sendRefreshToken } from './sendRefreshtoken';
       return res.send({ ok: false, accessToken: '' });
     }
 
+    if (user.tokenVersion !== payload.tokenVersion) {
+      return res.send({ ok: false, accessToken: '' });
+    }
+
     // set new refresh token cookie
     sendRefreshToken(res, createRefreshToken(user));
 
